@@ -1,1 +1,493 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christophe Florentin – Responsable Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1a7a8a;
+    --teal-dark: #0f5a68;
+    --teal-light: #e8f4f7;
+    --accent: #e8a020;
+    --text: #1a1a2e;
+    --muted: #5a6a72;
+    --white: #ffffff;
+    --bg: #f5f8f9;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+ 
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(15, 90, 104, 0.97);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 56px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+ 
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 3px; color: var(--white); }
+  .nav-logo span { color: var(--accent); }
+ 
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+ 
+  .hero {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #2a9db0 100%);
+    color: var(--white);
+    padding-top: 56px;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+ 
+  .hero-grid { display: grid; grid-template-columns: 360px 1fr; width: 100%; position: relative; z-index: 1; }
+ 
+  .hero-left {
+    background: rgba(0,0,0,0.18);
+    padding: 60px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    backdrop-filter: blur(4px);
+    animation: fadeInLeft 0.9s ease both;
+  }
+ 
+  @keyframes fadeInLeft { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes fadeInRight { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes growBar { from { width: 0 !important; } }
+ 
+  .photo-wrap { width:160px; height:160px; border-radius:50%; border:4px solid var(--accent); overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+  .photo-placeholder { width:100%; height:100%; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; font-size:52px; }
+ 
+  .hero-name { font-family:'Bebas Neue',sans-serif; font-size:2.4rem; letter-spacing:3px; text-align:center; line-height:1.1; }
+  .hero-title { font-size:0.72rem; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--accent); text-align:center; }
+  .hero-tagline { font-size:0.88rem; font-weight:300; font-style:italic; text-align:center; color:rgba(255,255,255,0.75); line-height:1.6; border-top:1px solid rgba(255,255,255,0.15); padding-top:18px; }
+ 
+  .contact-block { display:flex; flex-direction:column; gap:10px; width:100%; }
+  .contact-item { display:flex; align-items:center; gap:10px; font-size:0.8rem; color:rgba(255,255,255,0.85); }
+  .contact-item .icon { width:28px; height:28px; border-radius:7px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:13px; }
+  .contact-item a { color:rgba(255,255,255,0.85); text-decoration:none; }
+  .contact-item a:hover { color:var(--accent); }
+ 
+  .hero-right { padding:60px 60px 60px 50px; display:flex; flex-direction:column; justify-content:center; animation:fadeInRight 0.9s ease 0.2s both; }
+ 
+  .years-badge { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--white); padding:7px 18px; border-radius:100px; font-size:0.75rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; width:fit-content; }
+ 
+  .hero-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,5vw,4.5rem); line-height:1; letter-spacing:2px; color:var(--white); margin-bottom:20px; }
+  .hero-headline span { color:var(--accent); }
+ 
+  .hero-desc { font-size:0.98rem; font-weight:300; color:rgba(255,255,255,0.8); line-height:1.7; max-width:500px; margin-bottom:36px; }
+ 
+  .info-chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .chip { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:var(--white); padding:6px 15px; border-radius:100px; font-size:0.75rem; }
+ 
+  .scroll-cta { margin-top:36px; color:rgba(255,255,255,0.45); font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; animation:bounce 2s ease infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+ 
+  section { scroll-margin-top: 56px; }
+ 
+  .main { max-width:1100px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:1fr 320px; gap:60px; }
+ 
+  .section-label { display:flex; align-items:center; gap:14px; margin-bottom:32px; }
+  .section-label .dot { width:10px; height:10px; border-radius:50%; background:var(--teal); flex-shrink:0; }
+  .section-label h2 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:3px; color:var(--teal-dark); }
+  .section-label .line { flex:1; height:1px; background:linear-gradient(to right, var(--teal), transparent); }
+ 
+  .timeline { display:flex; flex-direction:column; gap:28px; margin-bottom:56px; }
+  .tl-item { display:grid; grid-template-columns:68px 1fr; gap:18px; }
+  .tl-year { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .year-badge { background:var(--teal); color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:0.95rem; letter-spacing:1px; padding:4px 8px; border-radius:6px; white-space:nowrap; text-align:center; line-height:1.3; }
+  .year-badge.active { background:var(--accent); }
+  .tl-line { flex:1; width:2px; background:linear-gradient(to bottom, var(--teal-light), transparent); margin:0 auto; }
+ 
+  .tl-card { background:var(--white); border-radius:14px; padding:22px 26px; box-shadow:0 2px 20px rgba(0,0,0,0.06); border-left:3px solid var(--teal); transition:transform 0.2s, box-shadow 0.2s; }
+  .tl-card:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.1); }
+  .tl-card.active { border-left-color:var(--accent); }
+  .tl-card h3 { font-size:0.7rem; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--teal); margin-bottom:4px; }
+  .tl-card.active h3 { color:var(--accent); }
+  .tl-card h4 { font-size:1rem; font-weight:500; color:var(--text); margin-bottom:3px; }
+  .tl-card .org { font-size:0.83rem; color:var(--muted); font-style:italic; margin-bottom:10px; }
+  .tl-card p { font-size:0.85rem; color:var(--muted); line-height:1.65; }
+ 
+  .formations { display:flex; flex-direction:column; gap:16px; }
+  .form-card { background:var(--white); border-radius:12px; padding:18px 22px; box-shadow:0 2px 16px rgba(0,0,0,0.05); display:flex; gap:16px; align-items:flex-start; }
+  .form-icon { width:38px; height:38px; border-radius:10px; background:var(--teal-light); display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .form-card h4 { font-size:0.88rem; font-weight:500; color:var(--text); margin-bottom:2px; }
+  .form-card .school { font-size:0.78rem; color:var(--teal); font-weight:500; margin-bottom:5px; }
+  .form-card p { font-size:0.8rem; color:var(--muted); line-height:1.5; }
+ 
+  .sidebar { display:flex; flex-direction:column; gap:36px; }
+  .info-card { background:linear-gradient(135deg, var(--teal-dark), var(--teal)); border-radius:16px; padding:26px; color:var(--white); }
+  .info-card h3 { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:2px; margin-bottom:14px; color:var(--accent); }
+  .info-row { display:flex; flex-direction:column; gap:9px; }
+  .info-item { display:flex; align-items:center; gap:10px; font-size:0.82rem; color:rgba(255,255,255,0.85); }
+ 
+  .skills-list { display:flex; flex-direction:column; gap:13px; }
+  .skill-row { display:flex; flex-direction:column; gap:5px; }
+  .skill-name { font-size:0.75rem; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:var(--text); }
+  .skill-bar { height:5px; background:var(--teal-light); border-radius:10px; overflow:hidden; }
+  .skill-fill { height:100%; background:linear-gradient(to right, var(--teal), #2a9db0); border-radius:10px; animation:growBar 1.2s ease both; }
+ 
+  .tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .tag { background:var(--teal-light); color:var(--teal-dark); padding:5px 13px; border-radius:100px; font-size:0.73rem; font-weight:500; }
+ 
+  /* ── PORTFOLIO ── */
+  #portfolio { background:var(--text); padding:80px 40px; }
+  .portfolio-inner { max-width:1100px; margin:0 auto; }
+ 
+  .portfolio-header { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+  .portfolio-header .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .portfolio-header h2 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:3px; color:var(--white); }
+  .portfolio-header .line { flex:1; height:1px; background:linear-gradient(to right, var(--accent), transparent); }
+  .portfolio-sub { color:rgba(255,255,255,0.45); font-size:0.83rem; font-weight:300; margin-bottom:32px; padding-left:24px; }
+ 
+  .pages-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:40px; }
+  .page-thumb { border-radius:10px; overflow:hidden; cursor:pointer; aspect-ratio:3/4; position:relative; transition:transform 0.3s, box-shadow 0.3s; }
+  .page-thumb:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+  .page-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+  .page-thumb:hover img { transform:scale(1.04); }
+  .page-num { position:absolute; bottom:8px; left:8px; background:var(--accent); color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:1px; padding:2px 8px; border-radius:4px; }
+ 
+  .highlights-label { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+  .highlights-label .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .highlights-label h3 { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:3px; color:var(--white); }
+  .highlights-label .line { flex:1; height:1px; background:linear-gradient(to right, rgba(232,160,32,0.4), transparent); }
+ 
+  .portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+ 
+  .p-card { position:relative; border-radius:12px; overflow:hidden; cursor:pointer; aspect-ratio:4/3; transition:transform 0.3s, box-shadow 0.3s; }
+  .p-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.5); }
+  .p-card.tall { aspect-ratio:3/4; }
+  .p-card.wide { grid-column:span 2; aspect-ratio:16/9; }
+  .p-card img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+  .p-card:hover img { transform:scale(1.04); }
+ 
+  .p-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(15,90,104,0.92) 0%, transparent 55%); opacity:0; transition:opacity 0.3s; display:flex; align-items:flex-end; padding:18px; }
+  .p-card:hover .p-overlay { opacity:1; }
+  .p-cat { display:inline-block; background:var(--accent); color:var(--white); padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:5px; }
+  .p-label { color:var(--white); font-size:0.78rem; font-weight:500; letter-spacing:0.5px; }
+ 
+  .dl-btn { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:var(--white); padding:12px 28px; border-radius:100px; text-decoration:none; font-size:0.82rem; font-weight:500; letter-spacing:1px; text-transform:uppercase; transition:opacity 0.2s; margin-top:32px; }
+  .dl-btn:hover { opacity:0.85; }
+ 
+  /* LIGHTBOX */
+  .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:200; display:none; align-items:center; justify-content:center; padding:30px; }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:90vw; max-height:85vh; border-radius:8px; object-fit:contain; }
+  .lb-close { position:absolute; top:18px; right:22px; background:none; border:none; color:var(--white); font-size:2rem; cursor:pointer; line-height:1; }
+  .lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.1); border:none; color:var(--white); font-size:2rem; width:50px; height:50px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .lb-nav:hover { background:var(--accent); }
+  .lb-prev { left:16px; }
+  .lb-next { right:16px; }
+ 
+  footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgba(255,255,255,0.45); font-size:0.76rem; letter-spacing:1px; }
+ 
+  @media (max-width:900px) {
+    nav { padding:0 20px; }
+    .nav-links { gap:16px; }
+    .hero-grid { grid-template-columns:1fr; }
+    .hero-left { padding:50px 24px; }
+    .hero-right { padding:36px 24px; }
+    .main { grid-template-columns:1fr; padding:48px 20px; gap:40px; }
+    #portfolio { padding:60px 20px; }
+    .portfolio-grid { grid-template-columns:repeat(2,1fr); }
+    .p-card.wide { grid-column:span 1; aspect-ratio:4/3; }
+    .pages-grid { grid-template-columns:repeat(2,1fr); }
+  }
+ 
+  @media (max-width:560px) {
+    .nav-links { display:none; }
+    .portfolio-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+</div>
+ 
+<nav>
+  <div class="nav-logo">C.<span>F</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Accueil</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="mailto:florentin.christophe@orange.fr">Contact</a></li>
+  </ul>
+</nav>
+ 
+<section id="hero">
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="photo-wrap">
+          <div class="photo-placeholder">👤</div>
+        </div>
+        <div>
+          <div class="hero-name">Christophe<br>Florentin</div>
+          <div class="hero-title">Responsable Communication</div>
+        </div>
+        <p class="hero-tagline">25 ans d'expérience dans la communication publique et institutionnelle.</p>
+        <div class="contact-block">
+          <div class="contact-item"><div class="icon">📍</div><span>45 rue des Bois – Guignicourt</span></div>
+          <div class="contact-item"><div class="icon">📞</div><span>06 38 58 25 52</span></div>
+          <div class="contact-item"><div class="icon">✉️</div><a href="mailto:florentin.christophe@orange.fr">florentin.christophe@orange.fr</a></div>
+          <div class="contact-item"><div class="icon">🌐</div><a href="https://www.picardiedeschateaux.fr" target="_blank">picardiedeschateaux.fr</a></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="years-badge">⭐ 25 ans d'expérience</div>
+        <h1 class="hero-headline">Communication<br><span>Publique &</span><br>Institutionnelle</h1>
+        <p class="hero-desc">Stratégie de communication, gestion de projets print, digitaux et événementiels. Rédaction éditoriale, évaluation des politiques publiques et pilotage budgétaire.</p>
+        <div class="info-chips">
+          <span class="chip">🏛️ Fonctionnaire FPT</span>
+          <span class="chip">🎂 Né le 04/04/1970</span>
+          <span class="chip">💰 Prétentions : 40 k€</span>
+          <span class="chip">📐 Adobe CC</span>
+          <span class="chip">🖊️ Rédaction éditoriale</span>
+        </div>
+        <div class="scroll-cta">↓ &nbsp; Découvrir mon parcours</div>
+      </div>
+    </div>
+  </header>
+</section>
+ 
+<section id="parcours">
+  <div class="main">
+    <div>
+      <div class="section-label">
+        <div class="dot"></div><h2>Expériences</h2><div class="line"></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">
+            <div class="year-badge active">2017<br><small style="font-size:0.6rem;letter-spacing:0">en cours</small></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card active">
+            <h3>Poste actuel</h3>
+            <h4>Responsable Communication Int/Externe</h4>
+            <div class="org">Communauté de communes Picardie des Châteaux</div>
+            <p>Stratégie de communication – gestion et conception des projets de communication print, digitaux et événementiels (magazine, publications de services, site internet/extranet, campagne d'emailing, événements culturels). Rédaction des contenus éditoriaux et des discours politiques. Évaluation des politiques publiques. Gestion du budget de service.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">
+            <div class="year-badge">2000</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <h3>Expérience</h3>
+            <h4>Chargé de Communication Multimédia</h4>
+            <div class="org">Communauté de communes des Vallons d'Anizy</div>
+            <p>Réalisation des supports de communication print (magazine, rapport d'activité, affiche et plaquette de service). Conception et mise à jour des supports multimédia.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year"><div class="year-badge">1996</div></div>
+          <div class="tl-card">
+            <h3>Expérience</h3>
+            <h4>Chargé de Mission Communication</h4>
+            <div class="org">Centres sociaux de la ville de Reims</div>
+            <p>Conception des supports de communication de l'association, collaboration aux différentes animations et événementiels (vernissage, forum des associations).</p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="section-label">
+        <div class="dot"></div><h2>Formations</h2><div class="line"></div>
+      </div>
+      <div class="formations">
+        <div class="form-card">
+          <div class="form-icon">🎓</div>
+          <div>
+            <h4>Licence Professionnelle</h4>
+            <div class="school">Université de Limoges</div>
+            <p>Activités et techniques de communication – spécialité servicetique. Parcours AMO visant l'intégration des TIC dans les organisations publiques et privées.</p>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-icon">📋</div>
+          <div>
+            <h4>BTS Communication</h4>
+            <div class="school">Esupcom' Reims</div>
+            <p>Stratégie de communication, plan média, création publicitaire.</p>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-icon">🏅</div>
+          <div>
+            <h4>Baccalauréat ES — BPJEPS — Licence UEFA B</h4>
+            <div class="school">Formations complémentaires</div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <aside class="sidebar">
+      <div class="info-card">
+        <h3>Informations</h3>
+        <div class="info-row">
+          <div class="info-item">🏛️ &nbsp;Fonctionnaire FPT</div>
+          <div class="info-item">📅 &nbsp;Né le 04/04/1970</div>
+          <div class="info-item">💶 &nbsp;Prétentions : 40 k€</div>
+          <div class="info-item">📍 &nbsp;Guignicourt (02)</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label"><div class="dot"></div><h2>Compétences</h2></div>
+        <div class="skills-list">
+          <div class="skill-row"><span class="skill-name">Adobe CC Print (Ai, Ps, Id)</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Adobe CC Vidéo (Lr, Pr)</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Rédaction de contenus</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Développement web</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Réseaux sociaux</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Conception graphique</span><div class="skill-bar"><div class="skill-fill" style="width:93%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Gestion de projet</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label"><div class="dot"></div><h2>Domaines</h2></div>
+        <div class="tags">
+          <span class="tag">Communication publique</span>
+          <span class="tag">Print</span>
+          <span class="tag">Digital</span>
+          <span class="tag">Événementiel</span>
+          <span class="tag">Éditorial</span>
+          <span class="tag">Stratégie</span>
+          <span class="tag">Budget</span>
+          <span class="tag">Multimédia</span>
+          <span class="tag">Institutionnel</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+ 
+<section id="portfolio">
+  <div class="portfolio-inner">
+    <div class="portfolio-header">
+      <div class="dot"></div>
+      <h2>Portfolio de réalisations</h2>
+      <div class="line"></div>
+    </div>
+    <p class="portfolio-sub">Affiches, magazines, guides, sites web, campagnes événementielles — Picardie des Châteaux</p>
+ 
+    <div class="pages-grid">
+      <div class="page-thumb" onclick="openLightbox(0)">
+        <img src="portfolio_p1.jpg" alt="Portfolio page 1">
+        <div class="page-num">01</div>
+      </div>
+      <div class="page-thumb" onclick="openLightbox(1)">
+        <img src="portfolio_p2.jpg" alt="Portfolio page 2">
+        <div class="page-num">02</div>
+      </div>
+      <div class="page-thumb" onclick="openLightbox(2)">
+        <img src="portfolio_p3.jpg" alt="Portfolio page 3">
+        <div class="page-num">03</div>
+      </div>
+      <div class="page-thumb" onclick="openLightbox(3)">
+        <img src="portfolio_p4.jpg" alt="Portfolio page 4">
+        <div class="page-num">04</div>
+      </div>
+    </div>
+ 
+    <div class="highlights-label">
+      <div class="dot"></div>
+      <h3>Sélection de projets</h3>
+      <div class="line"></div>
+    </div>
+ 
+    <div class="portfolio-grid">
+      <div class="p-card wide" onclick="openLightbox(0)">
+        <img src="portfolio_p1.jpg" alt="Affiches événementielles" style="object-position:center top">
+        <div class="p-overlay"><div><div class="p-cat">Événementiel</div><div class="p-label">Affiches & campagnes culturelles</div></div></div>
+      </div>
+      <div class="p-card tall" onclick="openLightbox(2)">
+        <img src="portfolio_p3.jpg" alt="Fête du Livre" style="object-position:center top">
+        <div class="p-overlay"><div><div class="p-cat">Print</div><div class="p-label">Fête du Livre — Affiche</div></div></div>
+      </div>
+      <div class="p-card" onclick="openLightbox(1)">
+        <img src="portfolio_p2.jpg" alt="Site internet & Magazine" style="object-position:center top">
+        <div class="p-overlay"><div><div class="p-cat">Digital</div><div class="p-label">Site internet & Magazine '36'</div></div></div>
+      </div>
+      <div class="p-card" onclick="openLightbox(0)">
+        <img src="portfolio_p1.jpg" alt="Guide enfance-jeunesse" style="object-position:left center">
+        <div class="p-overlay"><div><div class="p-cat">Print</div><div class="p-label">Guide enfance-jeunesse</div></div></div>
+      </div>
+      <div class="p-card" onclick="openLightbox(3)">
+        <img src="portfolio_p4.jpg" alt="Communication territoriale" style="object-position:center top">
+        <div class="p-overlay"><div><div class="p-cat">Territorial</div><div class="p-label">Magazine territoire & animations</div></div></div>
+      </div>
+      <div class="p-card" onclick="openLightbox(1)">
+        <img src="portfolio_p2.jpg" alt="Forum emploi" style="object-position:left bottom">
+        <div class="p-overlay"><div><div class="p-cat">Print</div><div class="p-label">Forum de l'emploi & flyers</div></div></div>
+      </div>
+    </div>
+ 
+    <div style="text-align:center">
+      <a href="portfolio.pdf" target="_blank" class="dl-btn">📄 Télécharger le portfolio complet (PDF)</a>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  © 2025 Christophe Florentin — Responsable Communication &nbsp;·&nbsp; florentin.christophe@orange.fr
+</footer>
+ 
+<script>
+  const lbImages = ['portfolio_p1.jpg','portfolio_p2.jpg','portfolio_p3.jpg','portfolio_p4.jpg'];
+  let lbIndex = 0;
+ 
+  function openLightbox(idx) {
+    lbIndex = idx;
+    document.getElementById('lb-img').src = lbImages[lbIndex];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+ 
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lb-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+ 
+  function lbNav(dir) {
+    lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+    document.getElementById('lb-img').src = lbImages[lbIndex];
+  }
+ 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft') lbNav(-1);
+  });
+</script>
+</body>
+</html>
+ 
